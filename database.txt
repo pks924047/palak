@@ -1,0 +1,985 @@
+<?php 
+require_once 'includes/config.php';
+check_emp_auth();
+require_once 'callbacks/employer_profile_callback.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Theme Region">
+		<meta name="description" content="">
+		<title>Jobs | Job Portal / Job Board HTML Template</title>
+		<?php include_once('includes/css.php');?>
+	</head>
+	<style>
+	   
+	    .footera-sec{
+	        background: linear-gradient(rgb(5 34 46 / 89%),rgb(89 128 191))!important;
+	    }
+	    .container-fluid{
+	        display:none;
+	    }
+	    .heads{
+	        font-size: 32px;
+            font-weight: 600;
+            color: #fff;
+            padding-left: 30px;
+            font-family: "Roboto Slab";
+	    }
+	    .bosting{
+	        float:left;
+	        width:50%;
+	    }
+	    .boost-page{
+	        padding:0px!important;
+	    }
+	    .trial{
+	        padding: 30px 20px;
+            color: #fff;
+            background: linear-gradient(rgb(6 49 66 / 89%),rgb(24 42 70));
+            margin-bottom: 20px;
+	    }
+	    .boost{
+	        width: 60%;
+            border: 1px solid rgb(0 0 0 / 0%);
+            border-radius: 5px;
+            background-color: rgb(37, 87, 167);
+            margin: 0px auto 16px auto;
+            box-shadow: 0 3px 10px rgb(108 117 125 / 46%);
+	    }
+	    .no{
+	        text-align: right;
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff;
+	    }
+	    .para{
+	        font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: #fff;
+            font-family: "Roboto Slab";
+	    }
+	    .valid{
+	        font-weight: 600;
+            color: rgb(37 87 167 / 49%);
+             font-family: "Roboto Slab";
+	    }
+	    .quick{
+	        width:90%;
+	        margin:5px auto 25px auto;
+	    }
+	    .prs{
+	        text-align: center;
+            font-weight: 700;
+            color: rgb(0 57 149 / 65%);
+            font-family: "Roboto Slab";
+            font-size: 29px;
+	    }
+	    .paid-col{
+	        float: left;
+            padding: 10px;
+            margin: 5px auto;
+            background-color: #eef0f3;
+            width: 40%;
+            border-radius: 5px;
+            border: 1px solid #80808073;
+            box-shadow: 0 3px 10px rgb(108 117 125 / 46%);
+	    }
+	    .buy-btn{
+	        background: linear-gradient(rgb(5 34 46 / 89%),rgb(89 128 191));
+            color: #fff;
+            border-radius: 4px;
+            border:none;
+            width: 100%;
+            margin: 5px auto;
+            padding: 8px 16px;
+	    }
+	    
+	    .buy-cart{
+	        background: transparent;
+            color: #2557a7;
+            border-radius: 5px;
+            border: none;
+            border: 2px solid rgb(37 87 167 / 52%);
+            width: 100%;
+            font-weight: 600;
+            margin: 5px auto;
+            padding: 8px 16px;
+	    }
+	    .buy-cart1{
+	        background: transparent;
+            color: #2557a7;
+            border-radius: 5px;
+            border: none;
+            border: 2px solid rgb(37 87 167 / 52%);
+            width: 100%;
+            font-weight: 600;
+            margin: 5px auto;
+            padding: 8px 16px;
+	    }
+	    .buy-btn1{
+	       background: linear-gradient(rgb(5 34 46 / 89%),rgb(89 128 191));
+            color: #fff;
+            border-radius: 4px;
+            border:none;
+            width: 100%;
+            margin: 5px auto;
+            padding: 8px 16px;
+	    }
+	     .buy-cart2{
+	        background: transparent;
+            color: #2557a7;
+            border-radius: 5px;
+            border: none;
+            border: 2px solid rgb(37 87 167 / 52%);
+            width: 100%;
+            font-weight: 600;
+            margin: 5px auto;
+            padding: 8px 16px;
+	    }
+	    .buy-btn2{
+	       background: linear-gradient(rgb(5 34 46 / 89%),rgb(89 128 191));
+            color: #fff;
+            border-radius: 4px;
+            border:none;
+            width: 100%;
+            margin: 5px auto;
+            padding: 8px 16px;
+	    }
+	    .coin-btn{
+	        background: linear-gradient(rgb(5 34 46 / 89%),rgb(89 128 191));
+            color: #fff;
+            border-radius: 4px;
+            border:none;
+            width: 100%;
+            margin: auto;
+            font-family: Roboto Slab;
+            padding: 8px 16px;
+	    }
+	    .coin-btn a{
+	         color: #fff;
+	         
+	    }
+	    @media screen and (min-device-width: 250px) and (max-device-width: 768px){
+	        .boost {
+                 width: 100%;
+	        }
+	        .quick {
+                width: 100%;
+                margin: 5px auto 10px auto;
+            }
+            .paid-col {
+                width:100%;
+            }
+            .heads {
+               font-size: 30px;
+            }
+	    }
+	       
+     .card{
+         border: 1px solid #2557a747;
+         box-shadow: 0 3px 10px rgb(108 117 125 / 46%);
+         border-radius: 5px;
+         margin:10px 0px;
+     }
+     .h-card{
+             background: linear-gradient(rgb(5 34 46 / 89%),rgb(89 128 191))!important;
+             padding: 5px;
+             color: #fff;
+             text-align: center;
+     }
+     .card-title{
+         margin: 10px 0px 0px 0px;
+        font-size: 24px;
+     }
+     .plus{
+         margin-bottom: 2px;
+         font-size: 16px;
+     }
+     .h-hot{
+          font-family: Roboto-slab;
+          margin-bottom:5px;
+          font-weight: 700;
+     }
+     .rd{
+         color: rgb(37, 87, 167);
+         font-weight: 600;
+     }
+     .ca{
+         color: rgb(37, 87, 167);
+         font-weight: 600;
+         font-family: Roboto slab;
+     }
+     .ce{
+         color: rgb(37, 87, 167);
+         font-weight: 600;
+         font-family: Roboto slab;
+     }
+     .now-btn{
+         background: linear-gradient(rgb(5 34 46 / 89%),rgb(89 128 191))!important;
+         width: 100%;
+         color: #fff;
+         padding: 5px 0px;
+         border-radius: 5px;
+         margin: 5px 0px;
+         border: none;
+     }
+     .cart-btn{
+         background: #fff;
+         width: 100%;
+         color: rgb(37, 87, 167);
+         padding: 5px 0px;
+         font-weight: 700;
+         border-radius: 5px;
+          margin: 5px 0px;
+          border: 2px solid rgb(37 87 167 / 82%);
+     }
+     .third-boost1{
+         float:left;
+         margin:auto;
+         width:50%;
+     }
+      
+     .third{
+         border: 1px solid #2db5ff3d;
+         padding: 16px;
+         border-radius: 5px;
+         background: linear-gradient(rgb(5 145 203 / 6%),rgb(109 158 237 / 62%));
+         width: 90%;
+         margin: 60px auto 62px auto;
+     }
+      .third .row{
+          margin:0px;
+          padding:5px;
+      }
+      @media screen and (min-device-width: 250px) and (max-device-width: 800px){
+          .third-boost1{
+              float:left;
+             margin:10px auto;
+             width:95%;
+         }
+      }
+      /* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  width:80%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 100%;
+  background-color:rgb(37, 87, 167);
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px 5px;
+  position: absolute;
+  z-index: 1;
+  /*bottom: 125%;*/
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+ /* Popup container - can be anything you want */
+.popup1 {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+   width: 80%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup1 .popuptext {
+  visibility: hidden;
+  width: 100%;
+  background-color:rgb(37, 87, 167);
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px 5px;
+  position: absolute;
+  z-index: 1;
+  /*bottom: 125%;*/
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup1 .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup1 .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+ /* Popup container - can be anything you want */
+.popup2 {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  width:80%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup2 .popuptext {
+  visibility: hidden;
+  width: 100%;
+  background-color:rgb(37, 87, 167);
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px 5px;
+  position: absolute;
+  z-index: 1;
+  /*bottom: 125%;*/
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup2 .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup2 .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+</style>
+<style>
+#ccav-payment-form {
+    border: #c1c0c0 1px solid;
+    /*margin-top: 15px;*/
+    width: 50%;
+}
+.btn-payment {
+    background: #009614;
+    border: #038214 1px solid;
+    padding: 8px 30px;
+    border-radius: 3px;
+    color: #FFF;
+    cursor: pointer;
+}
+</style>
+	<body>
+		<?php include_once('includes/employer_header.php'); ?>
+		<section class="boost-page">
+		    <div class="trial">
+		            <h6 class="heads">Reach more candidates with <span style="color:red;">Job Boosts</span></h6> 
+			        <p style="font-size: 16px;  padding-left: 30px;">Try out THE DAILY WORK for FREE!</p>
+			        <button style="margin-left: 30px;   border-radius: 8px;  border: none;  padding: 4px 10px;"><a href="sales_enquiry.php" style="font-weight: 700;  color: #2557a7;">Sales Enquiry</a></button>
+			</div>
+			    
+			<!-- contanier -->
+		   <div class="container">  
+		       <!---->
+		     	<div class="boost">
+			    <div class="row" style="margin:0px; padding:10px;">
+			        <div class="bosting"> 
+			             <p class="para">Boost Your Jobs</p>
+			             <p class="valid">Valid only for 24 hours</p>
+			        </div>
+			        <div class="bosting"> 
+			           <p class="no">0</p> 
+			        </div>
+			    </div>
+			    </div>
+			    <!--end-->
+			  
+<?php
+//print_r($_SESSION);
+
+?>
+			    <div class="quick">
+			        <p class="prs" style="margin-bottom: 8px;">Quick & Easy Job Posting</p>
+			        <p style="text-align: center;  font-weight: 700;  font-size: 15px;  margin-bottom: 8px;  color: #2557a7;">Post A Job</p>
+			        <!--start-->
+			        <div class="row">
+			             <div class="paid-col">
+			                 <div class="popup" onclick="myFunction()"><i class="fa fa-info-circle" aria-hidden="true" style="color: #2557a7;"></i>
+                                    <span class="popuptext" id="myPopup">
+                                        <p style="font-size: 14px; margin-bottom: 4px; text-decoration: underline; font-family: roboto slab;">Characters in Job Description</p>
+                                        <p style="font-size: 12px; font-family: roboto slab;">Mention a detailed job description outlining the roles and responsibilities of the job. Use formatting to highlight major points in the job description and distinguish your job from other job postings.</p>
+
+                                        <p style="font-size: 14px; margin-bottom: 4px; text-decoration: underline; font-family: roboto slab;">Job Branding</p>
+                                        <p style="font-size: 12px; font-family: roboto slab;">Enhance your employer branding among jobseekers by attaching photos or PPT about the job or the company. Also attach logo to highlight the job better.</p>
+
+                                        <p style="font-size: 14px; margin-bottom: 4px; text-decoration: underline; font-family: roboto slab;">Boost on Job Search Page</p>
+                                        <p style="font-size: 12px; font-family: roboto slab;">Get a boost in job search. This helps more jobseekers discover your job while they are searching on Thedailywork.</p>
+                                    </span>
+</div>
+			                  <p style="text-align: center; font-size:18px; font-weight: 600; margin-bottom: 2px; color: #2557a7;">HOT-VACANCY</p>
+			                  <p style="color: rgb(37 87 167 / 68%);  text-align: center;">Advanced Job Posting</p>
+			                  <p style="text-align: center; font-size: 24px; color: #000000cf;" >₹1200</p>
+			                  <p  style="text-align: center; font-size:16px; color: #000000cf;">For All Cities</p>
+			                  
+			                  
+			                  <p style="color: rgb(22 77 167 / 95%);">
+			                      <i class="fa fa-check" aria-hidden="true" style="color: rgb(37, 87, 167);  margin-right: 5px;"></i>Detailed Job Description
+			                  </p>
+			                  <p style="color: rgb(22 77 167 / 95%);">
+			                      <i class="fa fa-check" aria-hidden="true" style="color: rgb(37, 87, 167);  margin-right: 5px;"></i>Boost on Job Search Page
+			                  </p>
+			                  <p style="color: rgb(22 77 167 / 95%);">
+			                      <i class="fa fa-check" aria-hidden="true" style="color: rgb(37, 87, 167);  margin-right: 5px;"></i>Job Branding
+			                  </p>
+                               
+                               <div style="display: flex; margin: 6px 0px;  justify-content: space-between; border-top: 1px dashed; border-bottom: 1px dashed;">
+                               <p style="font-family:Roboto Slab; font-weight:700; color:#2557a7; margin:4px 0px;">
+                                   Quantity : 
+                                   <span>
+                                       <select class="form-select" aria-label="Default select example" id="dropdown_data" style="color: rgb(22 77 167 / 95%); border:2px solid #2557a7a6; border-radius:6px;">
+                                             <option disabled selected>Select Quantity</option>
+                                             <option value="1">1</option>
+                                             <option value="2">2</option>
+                                             <option value="3">3</option>
+                                             <option value="4">4</option>
+                                             <option value="5">5</option>
+                                             <option value="6">6</option>
+                                             <option value="7">7</option>
+                                             <option value="8">8</option>
+                                             <option value="9">9</option>
+                                             <option value="10">10</option>
+                                       </select>
+                                    </span>
+                               </p>
+                               <p style="font-family:Roboto Slab; font-weight:700; color:#2557a7;  margin:4px 0px; display:none;" id="numericValue" ><span>1200</span></p>
+                               <p style="font-family:Roboto Slab; font-weight:700; color:#2557a7;  margin:4px 0px;" id="result"><span> </span></p>
+                               <p style="font-family:Roboto Slab; font-weight:700; color:#2557a7;  margin:4px 0px;" id="gst_amount" ><span> </span></p>
+                               <p style="font-family:Roboto Slab; font-weight:700; color:#2557a7;  margin:4px 0px;" id="total_amount" ><span> </span></p>
+                               </div>
+                               <p style="color:green; font-size: 12px; font-weight:600; margin-bottom:3px; font-family:Roboto Slab; display:none;" id="todisplay">10% OFF Apllied On More Than 5 Job Postings or More</p>
+                               <p style="color: rgb(22 77 167 / 95%); font-size: 12px; font-weight:600; margin-bottom:3px; font-family:Roboto Slab; " id="tohide">Flat 10% OFF | Buy 5 Job Postings or more</p>
+                               <p  style="color: rgb(22 77 167 / 95%); font-size: 12px; font-weight:600; font-family:Roboto Slab; ">Active for 30 days</p>
+                              <button class="buy-btn" id="toggleButton">Buy Now</button>
+                              <!--<a href="/IFRAME_KIT/dataFrom.htm" style="color:#fff;">Buy Now</a>-->
+                              <!--<button class="buy-cart">Add to cart</button>-->
+                              <button class="coin-btn"><a href="refer.php">Refer Friends & Earn Coins</a></button>
+			             </div>
+			             <?php
+			             
+			             $user_id = $_SESSION['user_id'];
+			             $package_name = 'HOT-VACANCY';
+			             $get_user_data = mysqli_query($conn,"SELECT emp_name,email,mobile,organization_name,state_id,city_id,pincode FROM `employer` WHERE `user_id`='$user_id'");
+			             $fetch_user_data = mysqli_fetch_assoc($get_user_data);
+			             //echo "<pre>";
+			             //print_r($fetch_user_data);
+			             
+			             $state_id = $fetch_user_data['state_id'];
+                         $district_id = $fetch_user_data['city_id'];
+                        $city_state_data =mysqli_query($conn,"SELECT districts.district_name, states.state_name FROM districts JOIN states ON districts.state_id = states.id where (states.id ='$state_id' AND districts.id ='$district_id')");
+
+                        $city_state_fetch = mysqli_fetch_assoc($city_state_data);
+                        function generate_order_id($prefix, $length = 6) {
+                            $current_time = date("YmdHis");
+                            $order_id = $prefix . '-' . $current_time;
+                            return $order_id;
+                        }
+                        
+                        // Example usage:
+                       $random_order_id = generate_order_id("ORD", 5);
+                        //action="IFRAME_KIT/ccavRequestHandler.php"
+			             ?>
+			            <div id="ccav-payment-form" style="display:none;">
+			                 <h1 style="text-align:center;" class="btn-payment">CCAvenue Payment</h1>
+                                <form name="frmPayment" action="IFRAME_KIT/ccavRequestHandler.php" method="POST">
+                                    	<div class="card-body">
+                                    		<div class="form-group row">
+                                				    <input class="form-control" placeholder="Enter full name" type="hidden" name="merchant_id" value="<?= '2677932'; ?>"/>
+                                				    <input type="hidden" name="merchant_id" value="<?= '2677932'; ?>"> 
+                                                    <input type="hidden" name="language" value="EN">
+                                                    <input type="hidden" name="currency" value="INR"> 
+                                                    <input type="hidden" name="redirect_url" value="https://thedailywork.in/IFRAME_KIT/ccavResponseHandler.php?emp_id=<?= $user_id;?>"> 
+                                                    <input type="hidden" name="cancel_url" value="https://thedailywork.in/IFRAME_KIT/ccavResponseHandler.php?emp_id=<?= $user_id;?>">
+                                    			<div class="col-lg-6">
+                                    				<label>Amount:</label>
+                                    				<div class="input-group">
+                                    				    <input type="text" name="amount" class="form-control" id="myInput" readonly required="required"/>
+                                    				</div>
+                                    			</div>
+                                    			<div class="col-lg-6">
+                                    				<label>Order ID:</label>
+                                    				<div class="input-group">
+                                    					<input class="form-control" type="text" name="order_id" value="<?= $random_order_id; ?>" readonly/>
+                                    				</div>
+                                    			</div>
+                                    		</div>
+                                    		
+                                    		<div class="form-group row">
+                                    			<div class="col-lg-6">
+                                    				<label>Email:</label>
+                                    				<div class="input-group">
+                                    					<input class="form-control" type="text" name="billing_email" value="<?= $fetch_user_data['email']; ?>" Placeholder="Email" required readonly/>
+                                    				</div>
+                                    			</div>
+                                    			<div class="col-lg-6">
+                                    				<label>Phone:</label>
+                                    				<div class="input-group">
+                                    					<input class="form-control" type="text" name="billing_tel" value="<?= $fetch_user_data['mobile'];?>" Placeholder="Phone" required readonly/>
+                                    				</div>
+                                    			</div>
+                                    		</div>
+                                    		
+                                    		
+                                    		
+                                    		<div class="form-group row">
+                                    			<div class="col-lg-6">
+                                    				<label>Billing Name:</label>
+                                    				<input class="form-control" type="text" name="billing_name" value="<?= $fetch_user_data['emp_name']; ?>" Placeholder="Billing Name" required readonly/>
+                                    			</div>
+                                    			<div class="col-lg-6">
+                                    				<label>Billing Address:</label>
+                                    				<div class="input-group">
+                                    					<input class="form-control" type="text" name="billing_address" value="<?= $city_state_fetch['district_name'].', '.$city_state_fetch['state_name'];?>" Placeholder="Billing Address" required readonly/>
+                                    				</div>
+                                    			</div>
+                                    		</div>
+                                    		
+                                    		<div class="form-group row">
+                                    			<div class="col-lg-4">
+                                    				<label>State:</label>
+                                    				<div class="input-group">
+                                    					<input class="form-control" type="text" name="billing_state" value="<?= $city_state_fetch['state_name'];?>" Placeholder="State" required readonly/>
+                                    				</div>
+                                    			</div>
+                                    			<div class="col-lg-4">
+                                    				<label>Country:</label>
+                                    				<input class="form-control" type="text" name="billing_country" value="<?= $city_state_fetch['district_name']; ?>" Placeholder="Country" required readonly/>
+                                    			</div>
+                                    			<div class="col-lg-4">
+                                    				<label>Zipcode:</label>
+                                    				<div class="input-group">
+                                    					<input class="form-control" type="text" name="billing_zip" value="<?= $fetch_user_data['pincode']; ?>" Placeholder="Zipcode" required readonly/>
+                                    					<!--<input type="hidden" name="integration_type" value="iframe_normal"/>-->
+                                    					<!--<input type="hidden" name="merchant_param1" value="HOT-VACANCY"/>-->
+                                    					<!--<input type="hidden" name="merchant_param2" value="HOT-VACANCY"/>-->
+                                    				</div>
+                                    			</div>
+                                    		</div>
+                                    		
+                                    		
+                                    	</div>
+                                		<div class="card-footer">
+	                                        <div class="row">
+                                    			<div class="col-lg-8">
+                                    				<button class="btn btn-payment" type="submit" id="buynow">Pay Now</button>
+                                    				<button type="reset" class="btn btn-secondary" id="closeButton">Cancel</button>
+                                    			</div>
+                                    		</div>
+                                    	</div>
+                                    </form>
+                                </div>
+			             
+			             <!-- 1 end-->
+			               
+			             
+			           <!--  <div class="paid-col">
+			                  <div class="popup1" onclick="myFunction1()"><i class="fa fa-info-circle" aria-hidden="true" style="color: #2557a7;"></i>
+                                     <span class="popuptext" id="myPopup1">
+                                         
+                                        <p style="font-size: 14px; margin-bottom: 4px; text-decoration: underline; font-family: roboto slab;">Characters in Job Description</p>
+                                        <p style="font-size: 12px; font-family: roboto slab;">Mention a simple job description outlining the roles and responsibilities of the job within 250 characters</p>
+
+                                        <p style="font-size: 14px; margin-bottom: 4px; text-decoration: underline; font-family: roboto slab;">Job Branding</p>
+                                        <p style="font-size: 12px; font-family: roboto slab;">Enhance your employer branding among jobseekers by attaching photos or PPT about the job or the company. Also attach logo to highlight the job better.</p>
+
+                                        <p style="font-size: 14px; margin-bottom: 4px; text-decoration: underline; font-family: roboto slab;">Boost on Job Search Page</p>
+                                        <p style="font-size: 12px; font-family: roboto slab;">Get a boost in job search. This helps more jobseekers discover your job while they are searching on The Daily Work.</p>
+                                         
+                                     </span>
+                              </div>
+			                 <p style="text-align: center; font-size:18px; font-weight: 600; margin-bottom: 2px; color: #2557a7;">CLASSIFIED</p>
+			                  <p style="color: rgb(37 87 167 / 68%);  text-align: center;">Basic Job Posting</p>
+			                  <p style="text-align: center; font-size: 24px; color: #000000cf;">₹800</p>
+			                  <p  style="text-align: center; font-size:16px; color: #000000cf;">For All Cities</p>
+			                  
+			                  <p style="color: rgb(22 77 167 / 95%);">
+			                      <i class="fa fa-check" aria-hidden="true" style="color: rgb(37, 87, 167);  margin-right: 5px;"></i>Detailed Job Description
+			                  </p>
+			                  <p style="color: gray;">
+			                      <i class="fa fa-times" aria-hidden="true" style="color: green;  margin-right: 5px;"></i></i>Boost on Job Search Page
+			                  </p>
+			                  <p style="color:gray;">
+			                      <i class="fa fa-times" aria-hidden="true" style="color: green;  margin-right: 5px;"></i>Job Branding
+			                  </p>
+                            
+                            <div style="display: flex; margin: 6px 0px;  justify-content: space-between; border-top: 1px dashed; border-bottom: 1px dashed;">
+                               <p style="font-family:Roboto Slab; font-weight:700; color:#2557a7; margin:4px 0px;">
+                                   Quantity : 
+                                   <span>
+                                       <select class="form-select" aria-label="Default select example" style="color: rgb(22 77 167 / 95%); border:2px solid #2557a7a6; border-radius:6px;">
+                                             <option selected>00</option>
+                                             <option value="1">01</option>
+                                             <option value="2">02</option>
+                                             <option value="3">03</option>
+                                             <option value="4">04</option>
+                                             <option value="5">05</option>
+                                             <option value="6">06</option>
+                                             <option value="7">07</option>
+                                             <option value="8">08</option>
+                                             <option value="9">09</option>
+                                             <option value="10">10</option>
+                                       </select>
+                                    </span>
+                               </p>
+                               <p style="font-family:Roboto Slab; font-weight:700; color:#2557a7;  margin:4px 0px;">Total : <span>₹ 800</span></p>
+                               </div>
+                               <p style="color: rgb(22 77 167 / 95%); font-size: 12px;font-weight:600; margin-bottom:3px;  font-family:Roboto Slab; ">Flat 10% OFF | Buy 5 Job Postings or more</p>
+                               <p  style="color: rgb(22 77 167 / 95%); font-size: 12px; font-weight:600; font-family:Roboto Slab; ">Active for 30 days</p>
+                                
+                              
+                              <button class="buy-btn1"><a href="time_counter.php" style="color:#fff;">Buy Now</a></button>
+                              <button class="buy-cart1">Add to cart</button>
+                              <button class="coin-btn"><a href="refer.php">Refer Friends & Earn Coins</a></button>
+			             </div>-->
+			             <!-- 2 end -->
+			             
+			             <!--<div class="paid-col">
+			                  <div class="popup2" onclick="myFunction2()"><i class="fa fa-info-circle" aria-hidden="true" style="color: #2557a7;"></i>
+                                 <span class="popuptext" id="myPopup2">
+                                        <p style="font-size: 14px; margin-bottom: 4px; text-decoration: underline; font-family: roboto slab;">Characters in Job Description</p>
+                                        <p style="font-size: 12px; font-family: roboto slab;">Mention a simple job description outlining the roles and responsibilities of the job within 250 characters</p>
+
+                                        <p style="font-size: 14px; margin-bottom: 4px; text-decoration: underline; font-family: roboto slab;">Job Branding</p>
+                                        <p style="font-size: 12px; font-family: roboto slab;">Enhance your employer branding among jobseekers by attaching photos or PPT about the job or the company. Also attach logo to highlight the job better.</p>
+
+                                        <p style="font-size: 14px; margin-bottom: 4px; text-decoration: underline; font-family: roboto slab;">Boost on Job Search Page</p>
+                                        <p style="font-size: 12px; font-family: roboto slab;">Get a boost in job search. This helps more jobseekers discover your job while they are searching on The Daily Work.</p>
+                                 </span>
+                              </div>
+			                 <p style="text-align: center; font-size:18px; font-weight: 600; margin-bottom: 2px; color: #2557a7;">CLASSIFIED</p>
+			                  <p style="color: rgb(37 87 167 / 68%);  text-align: center;">Basic Job Posting</p>
+			                  <p style="text-align: center; font-size: 24px; color: #000000cf;">₹400</p>
+			                  <p  style="text-align: center; font-size:16px; color: #000000cf;">For Non-Metro Cities</p>
+			                  
+			                  <p style="color: rgb(22 77 167 / 95%);">
+			                      <i class="fa fa-check" aria-hidden="true" style="color: rgb(37, 87, 167);  margin-right: 5px;"></i>Detailed Job Description
+			                  </p>
+			                  <p style="color: gray;">
+			                      <i class="fa fa-times" aria-hidden="true" style="color: green;  margin-right: 5px;"></i></i>Boost on Job Search Page
+			                  </p>
+			                  <p style="color:gray;">
+			                      <i class="fa fa-times" aria-hidden="true" style="color: green;  margin-right: 5px;"></i>Job Branding
+			                  </p>
+                            
+                            <div style="display: flex; margin: 6px 0px;  justify-content: space-between; border-top: 1px dashed; border-bottom: 1px dashed;">
+                               <p style="font-family:Roboto Slab; font-weight:700; color:#2557a7; margin:4px 0px;">
+                                   Quantity : 
+                                   <span>
+                                       <select class="form-select" aria-label="Default select example" style="color: rgb(22 77 167 / 95%); border:2px solid #2557a7a6; border-radius:6px;">
+                                             <option selected>00</option>
+                                             <option value="1">01</option>
+                                             <option value="2">02</option>
+                                             <option value="3">03</option>
+                                             <option value="4">04</option>
+                                             <option value="5">05</option>
+                                             <option value="6">06</option>
+                                             <option value="7">07</option>
+                                             <option value="8">08</option>
+                                             <option value="9">09</option>
+                                             <option value="10">10</option>
+                                       </select>
+                                    </span>
+                               </p>
+                               <p style="font-family:Roboto Slab; font-weight:700; color:#2557a7;  margin:4px 0px;">Total : <span>₹ 400</span></p>
+                               </div>
+                               <p style="color: rgb(22 77 167 / 95%); font-size: 12px; font-weight:600; margin-bottom:3px;  font-family:Roboto Slab; ">Flat 10% OFF | Buy 5 Job Postings or more</p>
+                               <p  style="color: rgb(22 77 167 / 95%); font-size: 12px; font-weight:600; font-family:Roboto Slab; ">Active for 30 days</p>
+                                
+                              
+                              <button class="buy-btn2"><a href="time_counter.php" style="color:#fff;">Buy Now</a></button>
+                              <button class="buy-cart2">Add to cart</button>
+                              <button class="coin-btn"><a href="refer.php">Refer Friends & Earn Coins</a></button>
+			             </div>-->
+			             <!-- 3 end -->
+			             
+			             <div style="margin: 10px; font-size: 13px; padding: 10px 16px; font-family:Roboto Slab;">
+			                 <ul style="list-style-type: disc;">
+			                     <li>For quantities upto 4, job posting credits should be consumed within 30 days from the date of activation/purchase.</li>
+			                     <li>For quantities 5 and above, credits should be consumed within 1 year from the date of activation/purchase.</li>
+			                     <li>Please note that the amounts are exclusive of taxes. Taxes will be added as applicable.</li>
+			                     <li>Discount percentage have been rounded off to the nearest number.</li>
+			                     <li>Metro cities include Delhi/NCR(National Capital Region), Delhi, Gurgaon, Noida, Greater Noida, Ghaziabad, Faridabad, Mumbai and Mumbai Suburbs, Thane, Navi Mumbai, Pune, Chennai, Bengaluru/Bangalore, Kolkata, Hyderabad/Secunderabad and Ahmedabad</li>
+			                 </ul>
+			             </div>
+			        </div>
+			        <!-- end -->
+			    </div>
+			    
+			    <!-- start-->
+			    <div class="second">
+			        <p class="prs" style="margin-bottom: 4px;">Search Candidates </p>
+			        <p style="text-align: center;  color: #2557a7d1;  font-size: 18px;  font-family:Roboto slab;  font-weight: 700;">Buy Resume Database Access Packages</p>
+			        <div class="row">
+			            <!-- card 1-->
+                             <div class="col-sm-4">
+                                 <div class="card">
+                                     <div class="h-card">
+                                         <h5 class="card-title">₹ 1400</h5>
+                                         <p class="plus">+</p>
+                                         <p class="h-hot">2 Hot Vacancy Job Posting Free</p>
+                                         <p class="h-hot">Active For 1 Month</p>
+                                     </div>
+                                     <div class="card-body">
+                                         <div class="card-para">
+                                             <p class="rd">Resume Database Access</p>
+                                             <p class="ca"><i class="fa fa-book" aria-hidden="true"></i> 200 CV Access</p>
+                                             <p class="ce"><i class="fa fa-envelope" aria-hidden="true"></i> 2000 Emails  </p>
+                                         </div>
+                                         <div>
+                                             <button class="now-btn"><a href="time_counter.php" style="color:#fff;">Buy Now</a></button>
+                                             <!--<button class="cart-btn">Add to cart</button>-->
+                                              <button class="coin-btn"><a href="refer.php">Refer Friends & Earn Coins</a></button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                          <!-- card 1 end-->   
+                          
+                           <!-- card 1-->
+                             <div class="col-sm-4">
+                                 <div class="card">
+                                     <div class="h-card">
+                                         <h5 class="card-title">₹ 2000</h5>
+                                         <p class="plus">+</p>
+                                         <p class="h-hot">6 Hot Vacancy Job Posting Free</p>
+                                         <p class="h-hot">Active For 1 Month</p>
+                                     </div>
+                                     <div class="card-body">
+                                         <div class="card-para">
+                                             <p class="rd">Resume Database Access</p>
+                                             <p class="ca"><i class="fa fa-book" aria-hidden="true"></i> 400 CV Access</p>
+                                             <p class="ce"><i class="fa fa-envelope" aria-hidden="true"></i> 4000 Emails  </p>
+                                         </div>
+                                         <div>
+                                             <button class="now-btn"><a href="time_counter.php" style="color:#fff;">Buy Now</a></button>
+                                             <!--<button class="cart-btn">Add to cart</button>-->
+                                              <button class="coin-btn"><a href="refer.php">Refer Friends & Earn Coins</a></button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                          <!-- card 1 end-->   
+                          
+                           <!-- card 1-->
+                             <div class="col-sm-4">
+                                 <div class="card">
+                                     <div class="h-card">
+                                         <h5 class="card-title">₹ 3000</h5>
+                                         <p class="plus">+</p>
+                                         <p class="h-hot">12 Hot Vacancy Job Posting Free</p>
+                                          <p class="h-hot">Active For 1 Month</p>
+                                     </div>
+                                     <div class="card-body">
+                                         <div class="card-para">
+                                             <p class="rd">Resume Database Access</p>
+                                             <p class="ca"><i class="fa fa-book" aria-hidden="true"></i> 800 CV Access</p>
+                                             <p class="ce"><i class="fa fa-envelope" aria-hidden="true"></i> Unlimited Emails  </p>
+                                         </div>
+                                         <div>
+                                             <button class="now-btn"><a href="time_counter.php" style="color:#fff;">Buy Now</a></button>
+                                             <!--<button class="cart-btn">Add to cart</button>-->
+                                              <button class="coin-btn"><a href="refer.php">Refer Friends & Earn Coins</a></button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                          <!-- card 1 end-->   
+                    </div>
+                    
+                    <!--list-->
+                    <div style="margin: 10px; font-size: 13px; padding: 10px 16px; font-family:Roboto Slab;">
+			                 <ul style="list-style-type: disc;">
+			                     <li>CV View / CV Download / Click to view phone no. = 1 CV Access, 1 Excel download / Export to Response manager = 2 CV Access.</li>
+			                     <li>Job Posting credits should be consumed within 30 Days from the date of activation/purchase.</li>
+			                     <li>Please note that the amounts are exclusive of taxes. Taxes will be added as applicable.</li>
+			                     
+			                 </ul>
+			             </div>
+                    <!--list end-->
+			    </div>
+			    <!-- end -->
+			    
+			    <!-- third -->
+			    <div class="third">
+			           <div class="row">
+			               <div class="third-boost1">
+			                   <h4 style="font-weight: 700; color: #1fa4ed;  font-family: Roboto slab;  font-size: 32px;">The Daily Work App</h4>
+			                       <ul style="list-style-type: disclosure-closed; font-size: 16px;  padding: 10px 20px;  color: #6a6a6a;  font-family: roboto slab;">
+			                          <li style="margin: 4px 0px;">The Daily Work tracks the jobs that are advertised and provides information about the points vacancies open up with each.</li>
+			                          <li style="margin: 4px 0px;">This online portal makes it easier for people to find a job and gain some legitimacy in the process.</li>
+			                          <li style="margin: 4px 0px;">It helps students, those who have been unemployed for some time.</li>
+			                          
+			                       </ul>
+			                       <a href="https://play.google.com/store/apps/details?id=com.TheDailyWork.android.abc"><img src="images/app-down.png" alt="app" style="width: 30%;"></a>
+			               </div>
+			               <div class="third-boost1">
+			                   <img src="images/apps-logo.png" alt="true">
+			               </div>
+			           </div>
+			    </div>
+			    <!-- end -->
+			    
+			    
+		   </div>
+		    <!-- contanier end -->
+		</section>
+		
+	<!-- script-->
+	
+
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+
+<script>
+// When the user clicks on div, open the popup
+function myFunction1() {
+  var popup1 = document.getElementById("myPopup1");
+  popup1.classList.toggle("show");
+}
+</script>
+
+<script>
+// When the user clicks on div, open the popup
+function myFunction2() {
+  var popup2 = document.getElementById("myPopup2");
+   popup2.classList.toggle("show");
+}
+</script>
+ <script>
+  $(document).ready(function() {
+    $("#dropdown_data").on("change", function() {
+      // Get the selected option's value
+      
+      
+      
+      
+      var selectedValue = $(this).val();
+      
+      if (selectedValue !== "") {
+                    // Enable the button
+                    $("#buynow").prop("disabled", false);
+                } else {
+                    // Disable the button
+                    $("#buynow").prop("disabled", true);
+                }
+
+      // Get the numeric value from the <p> tag
+      var numericValue = $("#numericValue").text();
+
+      var result = selectedValue * numericValue;
+      //var gst_amount = result*0.18;
+      // Display the result in the 'result' <p> tag
+      if (selectedValue > 4) {
+            result *= 0.9; // Deduct 10% (multiply by 0.9)
+            
+            $("#tohide").hide();
+            $("#todisplay").show();
+          }else{
+            $("#tohide").show();
+            $("#todisplay").hide();
+          }
+          
+        var gst_amount = result*0.18;
+        
+        var total_amount = result+gst_amount;
+          
+      $("#result").text("Item Cost: ₹ " + result.toFixed(2));
+      $("#gst_amount").text("GST : 18%: ₹ " + gst_amount.toFixed(2));
+      $("#total_amount").text("Total: ₹ " + total_amount.toFixed(2));
+      
+     $('#myInput').val(total_amount.toFixed(2));
+    });
+    
+    $('#toggleButton').click(function() {
+        // Toggle the visibility of the div using jQuery's toggle() method
+       $('#ccav-payment-form').show();
+      });
+      
+    $("#closeButton").click(function() {
+                // Close the form when the button is clicked
+                $("#ccav-payment-form").hide();
+            });
+  });
+</script>
+
+	<!-- script -->
+	<!-- footer -->
+    <?php include_once('includes/consultancy_footer.php') ?>
+   <!-- footer end-->
+	</body>
+</html>
